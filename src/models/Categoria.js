@@ -46,7 +46,7 @@ export class Categoria{
         }
     }
     #validarDescricao(value) {
-        if(value && (value.trim().length < 1 || value.trim().length > 1000)){
+        if(!value && (value.trim().length < 1 || value.trim().length > 1000)){
             throw new Error ('O campo descrição e deve ter entre 1 a 1000 caracteres');           
         }
     }

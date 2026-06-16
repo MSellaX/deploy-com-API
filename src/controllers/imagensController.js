@@ -17,21 +17,21 @@ const imagensController = {
             const result = await imagensRepository.selecionar(param);
 
             if (!result || result.length === 0 || !result[0].image) {
-                return res.status(404).json({ message: 'Imagem não encontrada' });
+                return res.status(404).json({ message: 'Imagem não encontrada nos arquivos' });
             }
 
             const arquivo = result[0].image;
             const caminhoImagem = path.join(process.cwd(), 'uploads', 'imagens', arquivo);
 
             if (!fs.existsSync(caminhoImagem)) {
-                return res.status(404).json({ message: 'Arquivo de imagem não existe no servidor' });
+                return res.status(404).json({ message: 'imagem não existe no servidor' });
             }
 
             return res.sendFile(caminhoImagem, (err) => {
                 if (err) {
                     console.error('Erro ao enviar arquivo de imagem:', err);
                     if (!res.headersSent) {
-                        res.status(500).json({ message: 'Erro ao enviar imagem' });
+                        res.status(500).json({ message: 'Erro ao enviar imagem para WEB' });
                     }
                 }
             });
